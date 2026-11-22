@@ -1,0 +1,19 @@
+{
+  "format": 1,
+  "source": "Démonstration synthétique",
+  "temporal": true,
+  "demo": true,
+  "demo_version": "1.0.0",
+  "files": {
+    "items.parquet": {
+      "sha256": "e3992de7f02095149d1db338b9430ec22b404ea31bd6712f98dbd46bf313fce3",
+      "rows": 20,
+      "path": ".versions/1d511c04698bd661daf60422/items.parquet"
+    },
+    "interactions.parquet": {
+      "sha256": "76b2c70199ce8ffc6fd673b7489c04926bb1e5f6ebda72242badbbaa65a8c5ab",
+      "rows": 1113,
+      "path": ".versions/1d511c04698bd661daf60422/interactions.parquet"
+    }
+  }
+}
