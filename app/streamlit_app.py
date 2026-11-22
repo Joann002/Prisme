@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import base64
 import logging
+import os
 from pathlib import Path
 
 import streamlit as st
@@ -30,9 +31,9 @@ def data_uri(name, content_type="image/webp"):
     return f"data:{content_type};base64,{encoded}"
 
 
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner="Chargement du catalogue Prisme…")
 def resources():
-    runtime = Runtime(Recommender.load())
+    runtime = Runtime(Recommender.load(external_catalogs=os.getenv("RECO_EXTERNAL_CATALOGS", "1") == "1"))
     assets = {
         "hero": data_uri("hero.webp"),
         "tiles": [data_uri(f"art-{index}.webp") for index in range(12)],
