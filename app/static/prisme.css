@@ -108,6 +108,7 @@ body { margin: 0; }
 .prisme .tile-name { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; display: block; max-width: 100%; color: var(--text); background: none; border: 0; text-align: left; padding: 0; font-weight: 700; }
 .prisme .tile-name:hover { color: var(--gold); }
 .prisme .tile-info p { color: var(--muted); font-size: 11px; margin-top: 2px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.prisme .source-link { display: inline-block; margin: 4px 0; color: var(--gold); font-size: 11px; text-underline-offset: 2px; }
 .prisme .load-area { display: flex; justify-content: center; margin: 13px 0 0; }
 .prisme .selection { border: 1px solid #3c3327; background: var(--panel); border-radius: 12px; padding: 14px; }
 .prisme .selection-header { display: flex; align-items: center; gap: 9px; }
@@ -119,6 +120,7 @@ body { margin: 0; }
 .prisme .progress span { background: #3b3229; height: 3px; border-radius: 3px; }
 .prisme .progress .filled { background: var(--gold); }
 .prisme .seeds { min-height: 85px; display: grid; align-content: start; gap: 5px; margin-bottom: 12px; }
+.prisme .selection-total { padding-bottom: 10px; color: var(--muted); font-size: 12px; }
 .prisme .selection-empty { min-height: 85px; display: flex; justify-content: center; align-items: center; gap: 7px; text-align: center; padding: 11px; border: 1px dashed #514334; border-radius: 8px; color: var(--muted); font-size: 12px; }
 .prisme .selection-empty .icon { width: 15px; height: 15px; color: var(--gold); }
 .prisme .seed { display: flex; align-items: center; justify-content: space-between; gap: 5px; min-height: 28px; padding: 3px 5px 3px 8px; border-radius: 7px; background: #2a241d; font-size: 12px; }
@@ -134,13 +136,18 @@ body { margin: 0; }
 .prisme .empty, .prisme .loading { grid-column: 1 / -1; padding: 32px 12px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 8px; }
 .prisme .results { margin-top: 36px; scroll-margin-top: 20px; }
 .prisme .results-header { margin-bottom: 16px; }
+.prisme .feed-group { margin-bottom: 24px; }
+.prisme .feed-group h3 { font: 700 22px var(--heading); margin: 0 0 10px; }
 .prisme .result-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.prisme .feed-group .result-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .prisme .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .prisme .comparison-pane { min-width: 0; border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
 .prisme .comparison-pane h3 { font: 700 20px var(--heading); margin-bottom: 10px; }
 .prisme .comparison-pane .result-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .prisme .result-body { padding: 11px; }
 .prisme .result-body p { margin: 8px 0; font-size: 12px; }
+.prisme .result-body .source-link { margin: 0 0 8px; }
+.prisme .dialog-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
 .prisme .result-body .tile-name { white-space: normal; }
 .prisme .result-label { position: absolute; z-index: 1; left: 8px; top: 8px; background: #211910; color: var(--gold); border-radius: 5px; padding: 2px 7px; font-size: 12px; font-weight: 700; }
 .prisme .tags { margin: 7px 0; display: flex; flex-wrap: wrap; gap: 4px; }
@@ -167,7 +174,7 @@ body { margin: 0; }
 @media (max-width: 930px) {
   .prisme .workspace-grid { grid-template-columns: minmax(0, 1fr); }
   .prisme .selection { max-width: none; }
-  .prisme .result-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prisme .result-grid, .prisme .feed-group .result-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 680px) {
   .prisme .layout { display: block; }
