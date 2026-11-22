@@ -17,6 +17,8 @@ from api.schemas import (
     Catalog,
     CrossRequest,
     FeedbackRequest,
+    FeedRequest,
+    FeedResult,
     Identifier,
     RecommendationList,
     Slug,
@@ -122,6 +124,11 @@ def similar(request: Request, item_id: Annotated[str, PathParam(min_length=1, ma
 @app.post("/cross-recommend", response_model=RecommendationList)
 def cross_recommend(request: Request, body: CrossRequest):
     return runtime(request).cross(body)
+
+
+@app.post("/recommend/feed", response_model=FeedResult)
+def recommend_feed(request: Request, body: FeedRequest):
+    return runtime(request).feed(body)
 
 
 @app.post("/feedback", status_code=201)

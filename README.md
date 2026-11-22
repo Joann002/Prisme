@@ -21,7 +21,7 @@ Prisme recommande des films, des livres, des jeux, de la musique et des recettes
 
 ## Démarrer
 
-Python 3.11 à 3.13 et [uv](https://docs.astral.sh/uv/) sont pris en charge par le projet. La démo démarre sans clé d’API ni données externes.
+Python 3.11 à 3.13 et [uv](https://docs.astral.sh/uv/) sont pris en charge par le projet. La démo démarre sans clé d’API et dispose d’un catalogue inclus pour fonctionner hors ligne.
 
 ```bash
 make setup
@@ -29,6 +29,8 @@ make demo   # http://localhost:8501
 ```
 
 Dans un autre terminal, lance `make api` pour l’API et son interface sur `http://localhost:8000`. Swagger est disponible sur `http://localhost:8000/docs`. Les deux applications peuvent aussi démarrer via `docker compose up --build`.
+
+Dans **Pour toi**, ajoute au moins trois favoris dans un ou plusieurs thèmes, puis clique sur **Voir mon fil**. Les résultats sont regroupés par thème et peuvent être filtrés. Lorsqu’un thème propose assez de fiches externes, le fil les utilise en priorité et affiche un lien vers leur source. La démo Streamlit tente de charger cinq catalogues publics au démarrage. [Sources et fonctionnement du catalogue](docs/datasets.md)
 
 ```bash
 curl http://localhost:8000/domains
@@ -45,6 +47,7 @@ curl http://localhost:8000/cross-recommend \
 | `GET /recommend`, `POST /recommend/items` | Recommandations depuis un profil ou des favoris |
 | `GET /similar/{item_id}?domain=movies` | Voisins par contenu, avec désambiguïsation des ID |
 | `POST /cross-recommend` | Recommandations dans un deuxième domaine |
+| `POST /recommend/feed` | Recommandations pour chaque thème à partir de favoris de plusieurs catalogues |
 | `POST /feedback`, `GET /metrics` | Votes agrégés et métriques Prometheus |
 
 ## Architecture

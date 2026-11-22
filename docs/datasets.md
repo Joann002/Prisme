@@ -1,5 +1,19 @@
 # Fiches des données
 
+## Catalogues publics de la démo
+
+Streamlit charge un échantillon au démarrage et l’associe au catalogue de démonstration. Si une source est indisponible, le thème utilise ses données incluses. Les favoris servent au calcul dans Prisme et les sources reçoivent uniquement les requêtes de catalogue communes à tous les visiteurs.
+
+| Thème | Source et sélection |
+| --- | --- |
+| Films | Sélection de films et extraits de fiches de Wikipédia en français. Chaque fiche indique sa révision et son attribution. [Wikipédia](https://fr.wikipedia.org/wiki/Wikipédia:Droit_d%27auteur) |
+| Livres | Titres, auteurs, sujets et couvertures lorsqu’elles sont disponibles. [Open Library](https://openlibrary.org/developers/api) |
+| Jeux | Sélection de jeux gratuits de science-fiction, avec lien d’attribution. [FreeToGame](https://www.freetogame.com/api-doc) |
+| Musique | Albums, bandes originales et tags. [MusicBrainz](https://musicbrainz.org/doc/MusicBrainz_API) |
+| Recettes | Sélection de fiches du livre de cuisine en français, avec lien vers la recette. [Wikilivres](https://fr.wikibooks.org/wiki/Livre_de_cuisine) |
+
+Dans **Pour toi**, Prisme combine les classements obtenus depuis les thèmes des favoris. Un thème utilise ses fiches externes si elles sont assez nombreuses pour remplir la liste. Les profils et les interactions de la démo restent synthétiques. Les imports locaux et les benchmarks gardent leurs données. Pour activer les sources dans l’API autonome, définis `RECO_EXTERNAL_CATALOGS=1`. Pour les désactiver dans Streamlit, définis `RECO_EXTERNAL_CATALOGS=0`. Un index sémantique précalculé utilise son catalogue fixe.
+
 Les schémas d’import sont documentés ci-dessous. Télécharge les sources auprès de leurs producteurs et vérifie leur version et leurs conditions avant chaque nouveau partage ou usage commercial. Les données brutes et les Parquet externes restent en dehors du dépôt.
 
 | Domaine | Fichiers d’entrée et champs | Usage et limites |

@@ -10,6 +10,7 @@ import numpy as np
 from reco_platform.config import MODEL_LABELS, DomainConfig, load_configs
 from reco_platform.data import read_dataset
 from reco_platform.domains.base import Dataset, frequency_filter
+from reco_platform.domains.external import load_external
 from reco_platform.features.content import ContentSpace, item_tags
 from reco_platform.models.rankers import Collaborative, unit_scores
 
@@ -72,10 +73,17 @@ class Recommender:
                                     semantic_model, include_tags, semantic_index)
 
     @classmethod
-    def load(cls, directory: Path | None = None, *, semantic_model: str | None = None):
+    def load(cls, directory: Path | None = None, *, semantic_model: str | None = None,
+             external_catalogs: bool | None = None):
         configs = load_configs()
         index = os.getenv("RECO_SEMANTIC_INDEX") if not semantic_model else None
-        return cls(configs, {slug: read_dataset(config, directory) for slug, config in configs.items()},
+        datasets = {slug: read_dataset(config, directory) for slug, config in configs.items()}
+        if external_catalogs is None:
+            external_catalogs = os.getenv("RECO_EXTERNAL_CATALOGS") == "1"
+        # A precomputed semantic index is tied to a fixed catalogue fingerprint.
+        if external_catalogs and not index:
+            datasets = load_external(datasets)
+        return cls(configs, datasets,
                    semantic_model=semantic_model or os.getenv("RECO_SEMANTIC_MODEL") or None,
                    shared_users=os.getenv("RECO_SHARED_USERS") == "1",
                    semantic_index=Path(index) if index else None)
@@ -106,6 +114,7 @@ class Recommender:
         return [{
             "slug": slug, "label": domain.config.label, "singular": domain.config.singular,
             "icon": domain.config.icon, "items": len(domain.items), "demo": domain.dataset.demo,
+            "external_items": sum(bool(item.get("source_url")) for item in domain.catalog),
             "default_model": self.default_model(slug),
             "models": [{"id": model, "label": MODEL_LABELS[model]} for model in self.models(slug)],
         } for slug, domain in self.domains.items()]
@@ -121,6 +130,7 @@ class Recommender:
     @staticmethod
     def public_item(item):
         return {**{key: item[key] for key in ("item_id", "titre", "description", "domaine", "image", "year")},
+                "source": item.get("source", ""), "source_url": item.get("source_url", ""),
                 "tags": list(item_tags(item["tags"]))}
 
     def validate_ids(self, domain, ids):
@@ -165,8 +175,10 @@ class Recommender:
         if not np.any(scores):
             scores = collaborative.popularity
         explain_sources = sources if model not in {"random", "popular"} else []
-        return self._rank(domain, scores, explain_sources, excluded, k, diversify, candidates, semantic,
-                          "Aléatoire" if model == "random" else "Populaire dans ce domaine")
+        fallback = "Découverte dans ce domaine" if candidates is not None else "Populaire dans ce domaine"
+        if model == "random":
+            fallback = "Aléatoire"
+        return self._rank(domain, scores, explain_sources, excluded, k, diversify, candidates, semantic, fallback)
 
     def has_shared_users(self, source, target):
         return (source.dataset.demo and target.dataset.demo) or (
@@ -174,7 +186,7 @@ class Recommender:
         )
 
     def cross_recommend(self, source_slug: str, target_slug: str, liked: list[str], *,
-                        method="hybrid", k=10, diversify=True):
+                        method="hybrid", k=10, diversify=True, candidates: set[str] | None = None):
         if source_slug == target_slug:
             raise RequestError("Choisis deux domaines différents.", 422)
         source, target = self.domain(source_slug), self.domain(target_slug)
@@ -189,8 +201,43 @@ class Recommender:
             scores = 0.8 * scores + 0.2 * affinity if np.any(affinity) else scores
         if not np.any(scores):
             scores = target.model.popularity
-        return self._rank(target, scores, sources, set(), k, diversify, None, semantic,
-                          "Populaire dans ce domaine")
+        fallback = "Découverte dans ce domaine" if candidates is not None else "Populaire dans ce domaine"
+        return self._rank(target, scores, sources, set(), k, diversify, candidates, semantic, fallback)
+
+    def recommend_feed(self, favorites: dict[str, list[str]], *, k: int = 4):
+        selected = {slug: self.validate_ids(self.domain(slug), favorites[slug]) for slug in sorted(favorites)}
+        if sum(map(len, selected.values())) < 3:
+            raise RequestError("Ajoute au moins trois favoris pour composer ta sélection.", 422)
+
+        groups = {}
+        for target, domain in self.domains.items():
+            excluded = set(selected.get(target, ()))
+            external = {record["item_id"] for record in domain.catalog if record.get("source_url")}
+            candidates = external if len(external - excluded) >= k else None
+            weights = {}
+            best_matches = {}
+            for source, liked in selected.items():
+                depth = k * 3 + len(excluded)
+                ranks = (self.recommend(target, liked=liked, k=depth, candidates=candidates)
+                         if source == target else
+                         self.cross_recommend(source, target, liked, k=depth, candidates=candidates))
+                # Fuse ranks from different models and catalogues without comparing their raw scores.
+                for rank, match in enumerate(ranks, start=1):
+                    item_id = match["item_id"]
+                    if item_id in excluded:
+                        continue
+                    weights[item_id] = weights.get(item_id, 0.0) + 1 / (10 + rank)
+                    if item_id not in best_matches or rank < best_matches[item_id][0]:
+                        best_matches[item_id] = (rank, match)
+            if not weights:
+                groups[target] = []
+                continue
+            ranked = sorted(weights, key=lambda item_id: (-weights[item_id], best_matches[item_id][0], item_id))
+            peak = weights[ranked[0]]
+            groups[target] = [
+                {**best_matches[item_id][1], "score": round(weights[item_id] / peak, 5)} for item_id in ranked[:k]
+            ]
+        return groups
 
     def similar(self, slug: str, item_id: str, *, k=10):
         method = "semantic" if "semantic" in self.models(slug) else "tfidf"

@@ -25,13 +25,14 @@ const paths = {
 const domainOrder = ["movies", "books", "games", "music", "recipes"];
 const views = {
   discover: ["Découvrir", "Explore le catalogue", "Choisis 3 à 5 favoris pour composer ta sélection."],
+  feed: ["Pour toi", "Choisis tes favoris", "Ajoute au moins trois favoris dans un ou plusieurs thèmes."],
   cross: ["Entre les domaines", "Croise les domaines", "Pars de tes favoris dans un domaine et découvre des idées dans un autre."],
   compare: ["Comparer les modèles", "Compare les modèles", "Applique deux modèles à la même sélection et compare leurs résultats."],
 };
 const privacy = [
   "La démo ne demande ni compte, ni nom, ni adresse e-mail. Les profils du catalogue de démonstration sont synthétiques. Tes favoris restent dans cette session. Les résultats peuvent être mis en cache pendant cinq minutes.",
   "Chaque vote est compté par jour, domaine, élément et sens du vote, sans identifiant de profil. Les métriques servent à suivre les performances et la diversité des recommandations.",
-  "Si un catalogue importé fournit des images externes, leurs hébergeurs peuvent recevoir les demandes d’images.",
+  "Les catalogues publics sont chargés à partir de requêtes communes. Les hébergeurs des images externes peuvent recevoir les demandes d’images.",
 ];
 const pageSize = 6;
 
@@ -61,11 +62,11 @@ function imageIndex(item) {
   return 1;
 }
 
-function imageSource(value) {
+function externalUrl(value) {
   if (!value) return "";
   try {
     const url = new URL(value);
-    return url.protocol === "https:" ? url.href : "";
+    return url.protocol === "https:" && !url.username && !url.password ? url.href : "";
   } catch {
     return "";
   }
@@ -94,6 +95,7 @@ export function mount(root, assets, request, metadata) {
     catalogJob: 0,
     recJob: 0,
     result: null,
+    feedFilter: "all",
     busy: false,
   };
 
@@ -102,8 +104,10 @@ export function mount(root, assets, request, metadata) {
   });
   root.style.setProperty("--hero-art", 'url("' + assets.hero + '")');
   find("domain-count").textContent = domainList.length + (domainList.length === 1 ? " domaine" : " domaines");
-  find("source").textContent = domainList.every((row) => row.demo)
-    ? "Données de démonstration" : "Catalogues et données importés";
+  const connected = domainList.filter((row) => row.external_items > 0).length;
+  find("source").textContent = connected
+    ? "Sources externes · " + connected + "/" + domainList.length + " thèmes"
+    : domainList.every((row) => row.demo) ? "Données de démonstration" : "Catalogues et données importés";
   if (domainList.length < 2) root.querySelectorAll('[data-view="cross"]').forEach((node) => { node.hidden = true; });
 
   const domain = () => domainMap.get(state.domain);
@@ -124,7 +128,7 @@ export function mount(root, assets, request, metadata) {
 
   function poster(item, label, clickable = true) {
     const art = assets.tiles[imageIndex(item)];
-    const url = imageSource(item.image);
+    const url = externalUrl(item.image);
     const image = url ? '<img alt="" loading="lazy" referrerpolicy="no-referrer" src="' + escape(url) + '">' : "";
     const style = ' style="background-image:url(' + escape(art) + ')"';
     return clickable
@@ -136,6 +140,13 @@ export function mount(root, assets, request, metadata) {
   function tags(item) {
     return '<div class="tags">' + item.tags.slice(0, 4).map((tag) =>
       '<span class="tag">' + escape(tag) + '</span>').join("") + '</div>';
+  }
+
+  function sourceLink(item) {
+    const url = externalUrl(item.source_url);
+    if (!url) return "";
+    return '<a class="source-link" target="_blank" rel="noopener noreferrer" href="' + escape(url) +
+      '">' + escape(item.source ? "Voir sur " + item.source : "Voir la fiche source") + ' ↗</a>';
   }
 
   function paintDomains() {
@@ -159,7 +170,7 @@ export function mount(root, assets, request, metadata) {
         icon(selected ? "check" : "plus") + '</button><div class="tile-info">' +
         '<button type="button" class="tile-name" data-action="detail" data-id="' +
         escape(item.item_id) + '">' + escape(item.titre) + '</button><p>' +
-        escape(subtitle) + '</p></div></article>';
+        escape(subtitle) + '</p>' + sourceLink(item) + '</div></article>';
     }).join("") : '<p class="empty">Aucun élément trouvé.</p>';
     find("catalog-count").textContent = state.total + (state.total === 1 ? " élément" : " éléments");
     find("load-area").innerHTML = state.items.length < state.total
@@ -168,7 +179,14 @@ export function mount(root, assets, request, metadata) {
 
   function paintSelection() {
     const picked = seeds();
+    const feed = state.view === "feed";
+    const selectedCount = feed ? [...state.picked.values()].reduce((total, items) => total + items.size, 0)
+      : picked.size;
     find("selection-count").textContent = picked.size + " / 5";
+    find("selection-scope").textContent = feed ? domain().label + " · 5 favoris maximum" : "Les favoris de départ";
+    const total = find("selection-total");
+    total.hidden = !feed;
+    total.textContent = selectedCount + (selectedCount === 1 ? " favori au total" : " favoris au total");
     find("progress").innerHTML = Array.from({length: 5}, (_, index) =>
       '<span class="' + (index < picked.size ? "filled" : "") + '"></span>').join("");
     find("seeds").innerHTML = picked.size ? [...picked.values()].map((item) =>
@@ -177,9 +195,10 @@ export function mount(root, assets, request, metadata) {
       escape(item.item_id) + '" aria-label="' + escape("Retirer " + item.titre) + '">' + icon("x") +
       '</button></div>'
     ).join("") : '<div class="selection-empty">' + icon("plus") + '<span>Ajoute un premier favori.</span></div>';
-    submit.disabled = picked.size < 3 || state.busy ||
+    submit.disabled = selectedCount < 3 || state.busy ||
       (state.view === "compare" && state.modelA === state.modelB);
-    const label = { discover: "Voir mes recommandations", cross: "Explorer le domaine cible", compare: "Comparer les modèles" };
+    const label = { discover: "Voir mes recommandations", feed: "Voir mon fil",
+      cross: "Explorer le domaine cible", compare: "Comparer les modèles" };
     find("submit-label").textContent = state.busy ? "Calcul en cours…" : label[state.view];
   }
 
@@ -209,6 +228,7 @@ export function mount(root, assets, request, metadata) {
     state.recJob += 1;
     state.busy = false;
     state.result = null;
+    state.feedFilter = "all";
     find("results").hidden = true;
     find("notice").textContent = "";
   }
@@ -303,7 +323,7 @@ export function mount(root, assets, request, metadata) {
         poster(item, "", false) + '<div class="result-body"><button type="button" class="tile-name" ' +
         'data-action="result-detail" data-result="' + key + '" data-id="' + escape(item.item_id) + '">' +
         escape(item.titre) + '</button>' + tags(item) + '<p>' + escape(item.explanation) +
-        '</p><div class="vote-row">' + ["up", "down"].map((value) =>
+        '</p>' + sourceLink(item) + '<div class="vote-row">' + ["up", "down"].map((value) =>
           '<button type="button" class="icon-button" data-action="vote" data-vote="' + value +
           '" data-result="' + key + '" data-id="' + escape(item.item_id) + '" aria-label="' +
           escape(value === "up" ? "Suggestion utile" : "Suggestion peu utile") + '" aria-pressed="' +
@@ -319,7 +339,20 @@ export function mount(root, assets, request, metadata) {
     target.hidden = false;
     const header = '<header class="results-header"><h2>' + escape(heading) +
       '</h2><p>' + escape(description) + '</p></header>';
-    if (lists.length === 2) {
+    if (state.view === "feed") {
+      const filters = [{slug: "all", label: "Tous les thèmes"},
+        ...lists.map((list) => domainMap.get(list.domain))];
+      const chips = filters.map((row) => '<button class="domain" type="button" data-action="feed-filter" ' +
+        'data-filter="' + escape(row.slug) + '" aria-pressed="' + (state.feedFilter === row.slug) + '">' +
+        escape(row.label) + '</button>').join("");
+      const groups = lists.map((data, key) => ({data, key})).filter(({data}) =>
+        state.feedFilter === "all" || data.domain === state.feedFilter);
+      target.innerHTML = header + '<div class="domains" role="group" aria-label="Thèmes recommandés">' +
+        chips + '</div>' + groups.map(({data, key}) =>
+          '<section class="feed-group"><h3>' + escape(domainMap.get(data.domain).label) +
+          '</h3>' + resultsGrid(data, key) + '</section>'
+        ).join("");
+    } else if (state.view === "compare") {
       target.innerHTML = header + '<div class="comparison">' + lists.map((data, key) =>
         '<section class="comparison-pane"><h3>' + escape(domain().models.find(
           (model) => model.id === data.model
@@ -340,7 +373,15 @@ export function mount(root, assets, request, metadata) {
     const liked = [...seeds().keys()];
     const taste = (model) => request("taste", {domain: state.domain, model, liked, k: 10});
     try {
-      if (state.view === "compare") {
+      if (state.view === "feed") {
+        const favorites = Object.fromEntries([...state.picked].filter(([, items]) => items.size)
+          .map(([slug, items]) => [slug, [...items.keys()]]));
+        const {groups} = await request("feed", {favorites});
+        if (job !== state.recJob) return;
+        const lists = domainList.map((row) => groups.find((group) => group.domain === row.slug)).filter(Boolean);
+        state.result = {heading: "Recommandations pour toi", lists,
+          description: "Des idées par thème à partir de tous tes favoris."};
+      } else if (state.view === "compare") {
         const lists = await Promise.all([taste(state.modelA), taste(state.modelB)]);
         if (job !== state.recJob) return;
         state.result = {heading: "Résultats côte à côte", lists,
@@ -384,7 +425,8 @@ export function mount(root, assets, request, metadata) {
       : "";
     dialog('<h2>' + escape(item.titre) + '</h2>' + tags(item) +
       (item.description ? '<p>' + escape(item.description) + '</p>' : '') +
-      (item.explanation ? '<p>' + escape(item.explanation) + '</p>' : '') + action);
+      (item.explanation ? '<p>' + escape(item.explanation) + '</p>' : '') +
+      '<div class="dialog-actions">' + sourceLink(item) + action + '</div>');
   }
 
   function resultItem(control) {
@@ -426,6 +468,11 @@ export function mount(root, assets, request, metadata) {
       case "toggle":
       case "remove": toggleItem(item, control); break;
       case "recommend": computeRecommendations(); break;
+      case "feed-filter":
+        state.feedFilter = control.dataset.filter;
+        paintResults();
+        find("results").querySelector('[aria-pressed="true"]').focus({preventScroll: true});
+        break;
       case "detail": details(item, true); break;
       case "result-detail": details(resultItem(control), false); break;
       case "dialog-toggle":

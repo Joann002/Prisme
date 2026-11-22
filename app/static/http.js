@@ -16,7 +16,7 @@ function request(action, payload) {
     const {domain, ...query} = payload;
     return api("/catalog/" + encodeURIComponent(domain) + "?" + new URLSearchParams(query));
   }
-  const routes = {taste: "/recommend/items", cross: "/cross-recommend", feedback: "/feedback"};
+  const routes = {taste: "/recommend/items", cross: "/cross-recommend", feed: "/recommend/feed", feedback: "/feedback"};
   return api(routes[action], payload);
 }
 

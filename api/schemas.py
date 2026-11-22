@@ -28,6 +28,13 @@ class CrossRequest(Body):
     diversify: bool = True
 
 
+class FeedRequest(Body):
+    favorites: dict[Slug, Annotated[list[Identifier], Field(min_length=1, max_length=5)]] = Field(
+        min_length=1, max_length=10
+    )
+    k: Annotated[int, Field(ge=1, le=10)] = 4
+
+
 class FeedbackRequest(Body):
     domain: Slug
     item_id: Identifier
@@ -42,6 +49,8 @@ class Item(BaseModel):
     tags: list[str]
     image: str
     year: str
+    source: str = ""
+    source_url: str = ""
 
 
 class Recommendation(Item):
@@ -53,6 +62,10 @@ class RecommendationList(BaseModel):
     domain: str
     model: str
     recommendations: list[Recommendation]
+
+
+class FeedResult(BaseModel):
+    groups: list[RecommendationList]
 
 
 class Catalog(BaseModel):
