@@ -1,0 +1,894 @@
+{
+  "movies": [
+    {
+      "item_id": "dune",
+      "titre": "Dune",
+      "year": "2021",
+      "entity": "Dune",
+      "theme": "mondes",
+      "description": "Sable, prophétie et lutte de pouvoir dans un empire interstellaire.",
+      "tags": "Science-fiction, Space opera, Désert"
+    },
+    {
+      "item_id": "interstellar",
+      "titre": "Interstellar",
+      "year": "2014",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Des astronautes explorent un trou de ver pour trouver un nouveau foyer à l’humanité.",
+      "tags": "Science-fiction, Espace, Temps"
+    },
+    {
+      "item_id": "inception",
+      "titre": "Inception",
+      "year": "2010",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Une équipe s’introduit dans des rêves imbriqués pour y déposer une idée.",
+      "tags": "Thriller, Rêves, Énigme"
+    },
+    {
+      "item_id": "arrival",
+      "titre": "Premier Contact",
+      "year": "2016",
+      "entity": "Story of Your Life",
+      "theme": "mondes",
+      "description": "Une linguiste tente de communiquer avec des visiteurs extraterrestres dont le langage bouleverse le temps.",
+      "tags": "Science-fiction, Langage, Temps"
+    },
+    {
+      "item_id": "blade-runner",
+      "titre": "Blade Runner 2049",
+      "year": "2017",
+      "entity": "Blade Runner",
+      "theme": "futur",
+      "description": "Un enquêteur découvre un secret parmi les androïdes dans une mégapole pluvieuse.",
+      "tags": "Cyberpunk, Androïdes, Enquête"
+    },
+    {
+      "item_id": "matrix",
+      "titre": "Matrix",
+      "year": "1999",
+      "entity": "",
+      "theme": "futur",
+      "description": "Un pirate informatique remet en cause la réalité imposée par des machines.",
+      "tags": "Cyberpunk, Simulation, Action"
+    },
+    {
+      "item_id": "lord-rings",
+      "titre": "Le Seigneur des anneaux",
+      "year": "2001",
+      "entity": "The Lord of the Rings",
+      "theme": "mythes",
+      "description": "Une compagnie traverse des royaumes anciens pour détruire un anneau de pouvoir.",
+      "tags": "Fantasy, Quête, Mythologie"
+    },
+    {
+      "item_id": "princess",
+      "titre": "Princesse Mononoké",
+      "year": "1997",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Une jeune femme défend les esprits d’une forêt contre une cité industrielle.",
+      "tags": "Fantasy, Nature, Mythologie"
+    },
+    {
+      "item_id": "grand-budapest",
+      "titre": "The Grand Budapest Hotel",
+      "year": "2014",
+      "entity": "",
+      "theme": "intime",
+      "description": "Un concierge et son jeune protégé s’attirent des ennuis après un héritage inattendu.",
+      "tags": "Comédie, Amitié, Voyage"
+    },
+    {
+      "item_id": "amelie",
+      "titre": "Le Fabuleux Destin d’Amélie Poulain",
+      "year": "2001",
+      "entity": "",
+      "theme": "intime",
+      "description": "À Montmartre, une serveuse transforme discrètement la vie de ses voisins.",
+      "tags": "Paris, Comédie, Romance"
+    },
+    {
+      "item_id": "ratatouille",
+      "titre": "Ratatouille",
+      "year": "2007",
+      "entity": "",
+      "theme": "table",
+      "description": "Un rat qui rêve de cuisiner se retrouve dans les cuisines d’un grand restaurant parisien.",
+      "tags": "Cuisine, Paris, Comédie"
+    },
+    {
+      "item_id": "chef",
+      "titre": "Chef",
+      "year": "2014",
+      "entity": "",
+      "theme": "table",
+      "description": "Un cuisinier monte un food truck et renoue avec son fils sur les routes américaines.",
+      "tags": "Cuisine, Famille, Voyage"
+    },
+    {
+      "item_id": "whiplash",
+      "titre": "Whiplash",
+      "year": "2014",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Un jeune batteur de jazz se mesure aux exigences extrêmes d’un professeur.",
+      "tags": "Jazz, Musique, Obsession"
+    },
+    {
+      "item_id": "soul",
+      "titre": "Soul",
+      "year": "2020",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Un pianiste essaie de retrouver la Terre après une rencontre inattendue dans l’au-delà.",
+      "tags": "Jazz, Musique, Amitié"
+    },
+    {
+      "item_id": "knives-out",
+      "titre": "À couteaux tirés",
+      "year": "2019",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Un détective interroge une famille réunie autour de l’héritage d’un romancier.",
+      "tags": "Enquête, Mystère, Famille"
+    },
+    {
+      "item_id": "prestige",
+      "titre": "Le Prestige",
+      "year": "2006",
+      "entity": "The Prestige",
+      "theme": "enigmes",
+      "description": "Deux illusionnistes rivaux multiplient les secrets et les sacrifices à Londres.",
+      "tags": "Énigme, Rivalité, Mystère"
+    },
+    {
+      "item_id": "persuasion",
+      "titre": "Persuasion",
+      "year": "1995",
+      "entity": "Persuasion",
+      "theme": "intime",
+      "description": "Une femme retrouve un ancien amour dans une société attentive au rang et à la fortune.",
+      "tags": "Romance, Famille, Angleterre"
+    },
+    {
+      "item_id": "spirited",
+      "titre": "Le Voyage de Chihiro",
+      "year": "2001",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Une fille cherche ses parents dans des bains réservés aux esprits.",
+      "tags": "Fantasy, Quête, Mythologie"
+    },
+    {
+      "item_id": "tron",
+      "titre": "Tron : L’Héritage",
+      "year": "2010",
+      "entity": "",
+      "theme": "futur",
+      "description": "Un jeune homme explore une grille informatique dominée par des programmes rebelles.",
+      "tags": "Cyberpunk, Simulation, Musique"
+    },
+    {
+      "item_id": "apollo",
+      "titre": "Apollo 13",
+      "year": "1995",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un équipage doit rapporter sa capsule sur Terre après une explosion en plein vol.",
+      "tags": "Espace, Survie, Astronautes"
+    }
+  ],
+  "books": [
+    {
+      "item_id": "dune",
+      "titre": "Dune",
+      "year": "1965",
+      "entity": "Dune",
+      "theme": "mondes",
+      "description": "Sur une planète désertique, un héritier se retrouve au centre d’une guerre pour l’épice.",
+      "tags": "Science-fiction, Space opera, Désert"
+    },
+    {
+      "item_id": "project-hail-mary",
+      "titre": "Projet Dernière Chance",
+      "year": "2021",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un scientifique se réveille seul à bord d’un vaisseau et doit comprendre sa mission.",
+      "tags": "Science-fiction, Espace, Survie"
+    },
+    {
+      "item_id": "foundation",
+      "titre": "Fondation",
+      "year": "1951",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un mathématicien tente de préserver le savoir humain à la chute d’un empire galactique.",
+      "tags": "Science-fiction, Space opera, Société"
+    },
+    {
+      "item_id": "ted-chiang",
+      "titre": "La Tour de Babylone",
+      "year": "2002",
+      "entity": "Story of Your Life",
+      "theme": "mondes",
+      "description": "Recueil de récits spéculatifs sur les mathématiques, le langage et la perception du temps.",
+      "tags": "Science-fiction, Langage, Temps"
+    },
+    {
+      "item_id": "electric-sheep",
+      "titre": "Les androïdes rêvent-ils de moutons électriques ?",
+      "year": "1968",
+      "entity": "Blade Runner",
+      "theme": "futur",
+      "description": "Un chasseur de primes traque des androïdes dans un monde urbain et délabré.",
+      "tags": "Cyberpunk, Androïdes, Enquête"
+    },
+    {
+      "item_id": "neuromancer",
+      "titre": "Neuromancien",
+      "year": "1984",
+      "entity": "",
+      "theme": "futur",
+      "description": "Un pirate s’aventure dans une matrice informatique dominée par de puissantes organisations.",
+      "tags": "Cyberpunk, Simulation, Informatique"
+    },
+    {
+      "item_id": "lotr",
+      "titre": "Le Seigneur des anneaux",
+      "year": "1954",
+      "entity": "The Lord of the Rings",
+      "theme": "mythes",
+      "description": "Un jeune hobbit accepte de traverser la Terre du Milieu pour détruire un anneau.",
+      "tags": "Fantasy, Quête, Mythologie"
+    },
+    {
+      "item_id": "earthsea",
+      "titre": "Le Sorcier de Terremer",
+      "year": "1968",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Un apprenti magicien libère une ombre et parcourt un archipel pour lui faire face.",
+      "tags": "Fantasy, Quête, Mythologie"
+    },
+    {
+      "item_id": "howl",
+      "titre": "Le Château de Hurle",
+      "year": "1986",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Une jeune femme victime d’une malédiction rencontre un magicien dans son château ambulant.",
+      "tags": "Fantasy, Magie, Voyage"
+    },
+    {
+      "item_id": "pride",
+      "titre": "Orgueil et Préjugés",
+      "year": "1813",
+      "entity": "",
+      "theme": "intime",
+      "description": "Elizabeth Bennet et M. Darcy apprennent à se connaître au milieu des attentes familiales.",
+      "tags": "Romance, Famille, Angleterre"
+    },
+    {
+      "item_id": "persuasion",
+      "titre": "Persuasion",
+      "year": "1817",
+      "entity": "Persuasion",
+      "theme": "intime",
+      "description": "Anne Elliot retrouve Frederick Wentworth après plusieurs années de séparation.",
+      "tags": "Romance, Famille, Angleterre"
+    },
+    {
+      "item_id": "olive",
+      "titre": "L’Arbre aux haricots",
+      "year": "1988",
+      "entity": "",
+      "theme": "intime",
+      "description": "Une jeune femme traverse les États-Unis et se constitue une famille par affinité.",
+      "tags": "Amitié, Famille, Voyage"
+    },
+    {
+      "item_id": "kitchen",
+      "titre": "Kitchen",
+      "year": "1988",
+      "entity": "",
+      "theme": "table",
+      "description": "Une jeune femme endeuillée trouve du réconfort à cuisiner et à vivre auprès d’amis.",
+      "tags": "Cuisine, Famille, Amitié"
+    },
+    {
+      "item_id": "salt-fat",
+      "titre": "Sel, gras, acide, chaleur",
+      "year": "2017",
+      "entity": "",
+      "theme": "table",
+      "description": "Quatre principes pour composer des plats équilibrés à partir d’ingrédients simples.",
+      "tags": "Cuisine, Techniques, Saveurs"
+    },
+    {
+      "item_id": "jazz",
+      "titre": "Jazz",
+      "year": "1992",
+      "entity": "",
+      "theme": "rythme",
+      "description": "À Harlem, les voix des personnages se mêlent comme des improvisations sur une histoire d’amour.",
+      "tags": "Jazz, Musique, Harlem"
+    },
+    {
+      "item_id": "high-fidelity",
+      "titre": "Haute Fidélité",
+      "year": "1995",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Un disquaire revient sur ses ruptures en classant ses chansons préférées.",
+      "tags": "Musique, Vinyle, Romance"
+    },
+    {
+      "item_id": "orient-express",
+      "titre": "Le Crime de l’Orient-Express",
+      "year": "1934",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Hercule Poirot interroge les voyageurs d’un train arrêté en pleine neige.",
+      "tags": "Enquête, Mystère, Voyage"
+    },
+    {
+      "item_id": "the-prestige",
+      "titre": "Le Prestige",
+      "year": "1995",
+      "entity": "The Prestige",
+      "theme": "enigmes",
+      "description": "Deux illusionnistes se disputent la paternité d’un numéro qui défie les apparences.",
+      "tags": "Énigme, Rivalité, Mystère"
+    },
+    {
+      "item_id": "gideon",
+      "titre": "Gideon la Neuvième",
+      "year": "2019",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Une épéiste accompagne une nécromancienne dans une épreuve au sein d’un palais isolé.",
+      "tags": "Fantasy, Enquête, Magie"
+    },
+    {
+      "item_id": "room",
+      "titre": "La Chambre des merveilles",
+      "year": "2018",
+      "entity": "",
+      "theme": "intime",
+      "description": "Une mère retrouve une liste de rêves et entreprend de les vivre pour son fils.",
+      "tags": "Famille, Amitié, Voyage"
+    }
+  ],
+  "games": [
+    {
+      "item_id": "dune",
+      "titre": "Dune: Spice Wars",
+      "year": "2022",
+      "entity": "Dune",
+      "theme": "mondes",
+      "description": "Des factions s’affrontent pour l’épice et le contrôle d’une planète désertique.",
+      "tags": "Science-fiction, Space opera, Désert"
+    },
+    {
+      "item_id": "outer-wilds",
+      "titre": "Outer Wilds",
+      "year": "2019",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un astronaute explore un système solaire miniature pris dans une boucle temporelle.",
+      "tags": "Science-fiction, Espace, Temps"
+    },
+    {
+      "item_id": "no-mans-sky",
+      "titre": "No Man’s Sky",
+      "year": "2016",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un explorateur voyage de planète en planète à la recherche de ressources et de découvertes.",
+      "tags": "Science-fiction, Espace, Survie"
+    },
+    {
+      "item_id": "obs-dinn",
+      "titre": "Return of the Obra Dinn",
+      "year": "2018",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Un enquêteur reconstitue la disparition des passagers d’un navire marchand.",
+      "tags": "Enquête, Mystère, Énigme"
+    },
+    {
+      "item_id": "case-idol",
+      "titre": "The Case of the Golden Idol",
+      "year": "2022",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Des scènes de crime sont à reconstituer pour comprendre le parcours d’une idole.",
+      "tags": "Enquête, Mystère, Énigme"
+    },
+    {
+      "item_id": "portal",
+      "titre": "Portal 2",
+      "year": "2011",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Des portails et des machines permettent de résoudre les salles d’un laboratoire.",
+      "tags": "Énigme, Robot, Science-fiction"
+    },
+    {
+      "item_id": "cyberpunk",
+      "titre": "Cyberpunk 2077",
+      "year": "2020",
+      "entity": "",
+      "theme": "futur",
+      "description": "Un mercenaire évolue parmi les implants et les mégacorporations de Night City.",
+      "tags": "Cyberpunk, Simulation, Action"
+    },
+    {
+      "item_id": "stray",
+      "titre": "Stray",
+      "year": "2022",
+      "entity": "",
+      "theme": "futur",
+      "description": "Un chat traverse les ruelles d’une ville de robots pour retrouver la surface.",
+      "tags": "Cyberpunk, Androïdes, Exploration"
+    },
+    {
+      "item_id": "shadowrun",
+      "titre": "Shadowrun Returns",
+      "year": "2013",
+      "entity": "",
+      "theme": "futur",
+      "description": "Un enquêteur arpente une ville où magie, piratage et corporations se côtoient.",
+      "tags": "Cyberpunk, Enquête, Informatique"
+    },
+    {
+      "item_id": "witcher",
+      "titre": "The Witcher 3",
+      "year": "2015",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Un chasseur de monstres parcourt des royaumes en guerre à la recherche d’une jeune femme.",
+      "tags": "Fantasy, Quête, Mythologie"
+    },
+    {
+      "item_id": "hades",
+      "titre": "Hades",
+      "year": "2020",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Le fils d’Hadès tente de quitter les Enfers à l’aide des dieux de l’Olympe.",
+      "tags": "Fantasy, Action, Mythologie"
+    },
+    {
+      "item_id": "ori",
+      "titre": "Ori and the Will of the Wisps",
+      "year": "2020",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Un esprit lumineux explore une forêt ancienne à la recherche d’une amie.",
+      "tags": "Fantasy, Nature, Quête"
+    },
+    {
+      "item_id": "stardew",
+      "titre": "Stardew Valley",
+      "year": "2016",
+      "entity": "",
+      "theme": "intime",
+      "description": "Une ferme à rénover devient l’occasion de se lier aux habitants d’un village.",
+      "tags": "Simulation, Amitié, Nature"
+    },
+    {
+      "item_id": "unpacking",
+      "titre": "Unpacking",
+      "year": "2021",
+      "entity": "",
+      "theme": "intime",
+      "description": "Des objets sortis de cartons révèlent les étapes d’une vie à travers plusieurs logements.",
+      "tags": "Famille, Récit, Simulation"
+    },
+    {
+      "item_id": "overcooked",
+      "titre": "Overcooked! 2",
+      "year": "2018",
+      "entity": "",
+      "theme": "table",
+      "description": "Des équipes improvisent des plats dans des cuisines en mouvement.",
+      "tags": "Cuisine, Coopération, Comédie"
+    },
+    {
+      "item_id": "plateup",
+      "titre": "PlateUp!",
+      "year": "2022",
+      "entity": "",
+      "theme": "table",
+      "description": "Cuisiner et servir dans un restaurant dont on agence soi-même les postes.",
+      "tags": "Cuisine, Techniques, Coopération"
+    },
+    {
+      "item_id": "thumper",
+      "titre": "Thumper",
+      "year": "2016",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Un scarabée métallique avance sur une piste au tempo de percussions hypnotiques.",
+      "tags": "Musique, Rythme, Action"
+    },
+    {
+      "item_id": "sayonara",
+      "titre": "Sayonara Wild Hearts",
+      "year": "2019",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Une course musicale pop accompagne une héroïne à travers des paysages électriques.",
+      "tags": "Musique, Rythme, Romance"
+    },
+    {
+      "item_id": "gris",
+      "titre": "Gris",
+      "year": "2018",
+      "entity": "",
+      "theme": "intime",
+      "description": "Une jeune femme traverse des paysages qui retrouvent peu à peu leurs couleurs.",
+      "tags": "Deuil, Nature, Récit"
+    },
+    {
+      "item_id": "sable",
+      "titre": "Sable",
+      "year": "2021",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Une jeune nomade traverse le désert et rencontre les habitants de vestiges abandonnés.",
+      "tags": "Science-fiction, Désert, Exploration"
+    }
+  ],
+  "music": [
+    {
+      "item_id": "dune-score",
+      "titre": "Dune (Original Motion Picture Soundtrack)",
+      "year": "2021",
+      "entity": "Dune",
+      "theme": "mondes",
+      "description": "Une musique de film aux voix lointaines et aux percussions d’un empire du désert.",
+      "tags": "Science-fiction, Désert, Bande originale"
+    },
+    {
+      "item_id": "interstellar-score",
+      "titre": "Interstellar (Original Motion Picture Soundtrack)",
+      "year": "2014",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un orgue et des motifs répétitifs accompagnent un voyage au-delà du système solaire.",
+      "tags": "Science-fiction, Espace, Bande originale"
+    },
+    {
+      "item_id": "space",
+      "titre": "The Planets — Gustav Holst",
+      "year": "1918",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Une suite orchestrale en sept mouvements imaginant les planètes du Système solaire.",
+      "tags": "Espace, Orchestral, Classique"
+    },
+    {
+      "item_id": "aphex",
+      "titre": "Selected Ambient Works 85–92",
+      "year": "1992",
+      "entity": "",
+      "theme": "futur",
+      "description": "Des textures de synthétiseur enveloppantes se mêlent à des rythmes électroniques nocturnes.",
+      "tags": "Électronique, Ambiant, Synthétiseur"
+    },
+    {
+      "item_id": "blade-score",
+      "titre": "Blade Runner — Vangelis",
+      "year": "1994",
+      "entity": "Blade Runner",
+      "theme": "futur",
+      "description": "Des nappes de synthétiseur et des sonorités urbaines évoquent une métropole sous la pluie.",
+      "tags": "Cyberpunk, Androïdes, Synthétiseur"
+    },
+    {
+      "item_id": "tron-score",
+      "titre": "TRON: Legacy — Daft Punk",
+      "year": "2010",
+      "entity": "",
+      "theme": "futur",
+      "description": "Un orchestre et des séquences électroniques composent les thèmes d’un monde simulé.",
+      "tags": "Cyberpunk, Simulation, Électronique"
+    },
+    {
+      "item_id": "lotr-score",
+      "titre": "The Fellowship of the Ring — Howard Shore",
+      "year": "2001",
+      "entity": "The Lord of the Rings",
+      "theme": "mythes",
+      "description": "Des chœurs et des thèmes orchestraux accompagnent la quête d’une compagnie.",
+      "tags": "Fantasy, Quête, Orchestral"
+    },
+    {
+      "item_id": "mononoke",
+      "titre": "Princesse Mononoké — Joe Hisaishi",
+      "year": "1997",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Un thème symphonique rend hommage aux forêts, aux esprits et à leur fragilité.",
+      "tags": "Fantasy, Nature, Bande originale"
+    },
+    {
+      "item_id": "folk",
+      "titre": "Folklore — Taylor Swift",
+      "year": "2020",
+      "entity": "",
+      "theme": "intime",
+      "description": "Des histoires intimes mises en musique avec des arrangements folk.",
+      "tags": "Folk, Romance, Amitié"
+    },
+    {
+      "item_id": "blue",
+      "titre": "Blue — Joni Mitchell",
+      "year": "1971",
+      "entity": "",
+      "theme": "intime",
+      "description": "Des chansons acoustiques et personnelles sur les attaches et les départs.",
+      "tags": "Folk, Romance, Voyage"
+    },
+    {
+      "item_id": "rat-score",
+      "titre": "Ratatouille — Michael Giacchino",
+      "year": "2007",
+      "entity": "",
+      "theme": "table",
+      "description": "Musique orchestrale légère autour des cuisines parisiennes et de leur agitation.",
+      "tags": "Cuisine, Paris, Bande originale"
+    },
+    {
+      "item_id": "bossa",
+      "titre": "Getz/Gilberto — Stan Getz et João Gilberto",
+      "year": "1964",
+      "entity": "",
+      "theme": "table",
+      "description": "Une bossa nova acoustique à l’atmosphère feutrée qui accompagne volontiers un repas.",
+      "tags": "Bossa nova, Jazz, Ambiance"
+    },
+    {
+      "item_id": "kind-blue",
+      "titre": "Kind of Blue — Miles Davis",
+      "year": "1959",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Des improvisations modales à la trompette au fil de morceaux de jazz.",
+      "tags": "Jazz, Musique, Improvisation"
+    },
+    {
+      "item_id": "time-out",
+      "titre": "Time Out — The Dave Brubeck Quartet",
+      "year": "1959",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Un quartet de jazz explore des signatures rythmiques inhabituelles.",
+      "tags": "Jazz, Rythme, Improvisation"
+    },
+    {
+      "item_id": "discovery",
+      "titre": "Discovery — Daft Punk",
+      "year": "2001",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Des boucles disco et house mêlent synthétiseurs, samples et voix filtrées.",
+      "tags": "Électronique, Musique, Rythme"
+    },
+    {
+      "item_id": "inception-score",
+      "titre": "Inception — Hans Zimmer",
+      "year": "2010",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Des motifs au ralenti accompagnent une intrigue de rêves enchâssés.",
+      "tags": "Énigme, Rêves, Bande originale"
+    },
+    {
+      "item_id": "twin-peaks",
+      "titre": "Twin Peaks — Angelo Badalamenti",
+      "year": "1990",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Des thèmes sombres et un jazz discret installent une atmosphère d’enquête nocturne.",
+      "tags": "Enquête, Mystère, Jazz"
+    },
+    {
+      "item_id": "tango",
+      "titre": "Tango: Zero Hour — Astor Piazzolla",
+      "year": "1986",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Un quintette de tango combine rythmes de danse et improvisation.",
+      "tags": "Tango, Rythme, Musique"
+    }
+  ],
+  "recipes": [
+    {
+      "item_id": "spice-cake",
+      "titre": "Gâteau aux épices du désert",
+      "year": "",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un gâteau aux dattes, à la cannelle et à la cardamome inspiré des paysages désertiques.",
+      "tags": "Désert, Épices, Dessert"
+    },
+    {
+      "item_id": "moon-cake",
+      "titre": "Biscuits lunaires au sésame",
+      "year": "",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Des biscuits ronds au sésame noir dont la surface rappelle celle de la Lune.",
+      "tags": "Espace, Sésame, Dessert"
+    },
+    {
+      "item_id": "camp-lentils",
+      "titre": "Lentilles du bivouac",
+      "year": "",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un plat complet à faire mijoter avec peu de matériel lors d’une sortie en pleine nature.",
+      "tags": "Survie, Nature, Lentilles"
+    },
+    {
+      "item_id": "miso-neon",
+      "titre": "Ramen au miso et piment",
+      "year": "",
+      "entity": "",
+      "theme": "futur",
+      "description": "Dans l’esprit d’une échoppe nocturne, un bouillon au miso accueille champignons et nouilles.",
+      "tags": "Cyberpunk, Japon, Épices"
+    },
+    {
+      "item_id": "black-bun",
+      "titre": "Bao au sésame noir",
+      "year": "",
+      "entity": "",
+      "theme": "futur",
+      "description": "Un pain vapeur à la pâte colorée, garni de légumes croquants.",
+      "tags": "Japon, Sésame, Street food"
+    },
+    {
+      "item_id": "neon-soda",
+      "titre": "Soda citron vert et yuzu",
+      "year": "",
+      "entity": "",
+      "theme": "futur",
+      "description": "Une boisson acidulée à servir très fraîche avec des glaçons colorés.",
+      "tags": "Japon, Boisson, Agrumes"
+    },
+    {
+      "item_id": "mushroom-pie",
+      "titre": "Tourte forestière",
+      "year": "",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Une pâte feuilletée recouvre une garniture de champignons cueillis en forêt et d’herbes.",
+      "tags": "Forêt, Nature, Cuisine"
+    },
+    {
+      "item_id": "elven-stew",
+      "titre": "Ragoût de la clairière",
+      "year": "",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Une marmite de légumes racines, de haricots et de thym pour un repas après une randonnée.",
+      "tags": "Forêt, Nature, Légumes"
+    },
+    {
+      "item_id": "moss-shortbread",
+      "titre": "Sablés à la pistache",
+      "year": "",
+      "entity": "",
+      "theme": "mythes",
+      "description": "Une poudre de pistache apporte couleur et texture à des biscuits de goûter.",
+      "tags": "Forêt, Dessert, Pistache"
+    },
+    {
+      "item_id": "apple-tart",
+      "titre": "Tarte fine aux pommes",
+      "year": "",
+      "entity": "",
+      "theme": "intime",
+      "description": "Un dessert familial de pommes tranchées et de pâte dorée.",
+      "tags": "Famille, Dessert, Pomme"
+    },
+    {
+      "item_id": "tomato-soup",
+      "titre": "Soupe de tomates rôties",
+      "year": "",
+      "entity": "",
+      "theme": "intime",
+      "description": "Un bol à partager avec des croûtons de pain et un peu de basilic.",
+      "tags": "Famille, Cuisine, Légumes"
+    },
+    {
+      "item_id": "sunday-brioche",
+      "titre": "Brioche du dimanche",
+      "year": "",
+      "entity": "",
+      "theme": "intime",
+      "description": "Une brioche moelleuse à déchirer et à partager au petit-déjeuner.",
+      "tags": "Famille, Boulangerie, Cuisine"
+    },
+    {
+      "item_id": "ratatouille",
+      "titre": "Ratatouille provençale",
+      "year": "",
+      "entity": "",
+      "theme": "table",
+      "description": "Aubergines, courgettes et tomates mijotées avec de l’ail et des herbes.",
+      "tags": "Cuisine, Provence, Légumes"
+    },
+    {
+      "item_id": "green-pasta",
+      "titre": "Pasta au pesto maison",
+      "year": "",
+      "entity": "",
+      "theme": "table",
+      "description": "Du basilic, du parmesan et des pignons pilés pour une sauce fraîche aux herbes.",
+      "tags": "Cuisine, Techniques, Légumes"
+    },
+    {
+      "item_id": "mushroom-risotto",
+      "titre": "Risotto aux champignons",
+      "year": "",
+      "entity": "",
+      "theme": "table",
+      "description": "Le riz cuit au bouillon jusqu’à obtenir une texture crémeuse.",
+      "tags": "Cuisine, Techniques, Champignons"
+    },
+    {
+      "item_id": "gumbo",
+      "titre": "Gumbo de La Nouvelle-Orléans",
+      "year": "",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Un plat en sauce avec un roux, une spécialité des quartiers qui ont vu naître le jazz.",
+      "tags": "Jazz, Louisiane, Cuisine"
+    },
+    {
+      "item_id": "coffee-shake",
+      "titre": "Café glacé à la chicorée",
+      "year": "",
+      "entity": "",
+      "theme": "rythme",
+      "description": "Une boisson au café inspirée des cafés de La Nouvelle-Orléans.",
+      "tags": "Jazz, Louisiane, Boisson"
+    },
+    {
+      "item_id": "secret-cake",
+      "titre": "Fondant au cœur caché",
+      "year": "",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Un petit gâteau au chocolat révèle une ganache coulant au premier coup de cuillère.",
+      "tags": "Énigme, Chocolat, Dessert"
+    },
+    {
+      "item_id": "mystery-dumpling",
+      "titre": "Raviolis surprise",
+      "year": "",
+      "entity": "",
+      "theme": "enigmes",
+      "description": "Des raviolis aux garnitures variées dont les convives devinent les ingrédients.",
+      "tags": "Énigme, Cuisine, Techniques"
+    },
+    {
+      "item_id": "orange-salad",
+      "titre": "Salade d’oranges à la fleur d’oranger",
+      "year": "",
+      "entity": "",
+      "theme": "mondes",
+      "description": "Un dessert de fruits frais et d’épices servi dans les régions arides du bassin méditerranéen.",
+      "tags": "Désert, Épices, Agrumes"
+    }
+  ]
+}
