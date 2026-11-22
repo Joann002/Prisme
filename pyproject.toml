@@ -28,7 +28,7 @@ advanced = [
   "faiss-cpu>=1.10,<2", "sentence-transformers==5.1.2",
   "transformers==4.57.6", "torch>=2.10,<2.11",
 ]
-experiments = ["implicit>=0.7.2,<1", "optuna>=4.2,<5", "mlflow>=3,<4"]
+experiments = ["implicit>=0.7.2,<1", "optuna>=4.2,<6", "mlflow>=3,<4"]
 production = ["redis>=6,<8", "psycopg[binary]>=3.2,<4"]
 dev = ["pytest>=8.3,<10", "httpx>=0.28,<1", "ruff>=0.11,<1", "build>=1.2,<2"]
 docs = ["mkdocs>=1.6,<2"]
