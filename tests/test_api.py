@@ -30,6 +30,28 @@ def test_explicit_catalog_and_cross(client):
     assert result.json()["recommendations"][0]["titre"] == "Dune"
 
 
+def test_feed_groups_all_domains_with_favorites_from_multiple_catalogues(client):
+    payload = {"favorites": {"movies": ["dune", "interstellar"], "books": ["dune"]}, "k": 3}
+    response = client.post("/recommend/feed", json=payload)
+    assert response.status_code == 200, response.text
+    assert response.json() == client.post("/recommend/feed", json=payload).json()
+    groups = {group["domain"]: group["recommendations"] for group in response.json()["groups"]}
+    assert set(groups) == {"movies", "books", "games", "music", "recipes"}
+    for slug, matches in groups.items():
+        assert len(matches) == 3
+        assert set(payload["favorites"].get(slug, ())).isdisjoint(item["item_id"] for item in matches)
+        assert all(item["domaine"] == slug and item["explanation"] for item in matches)
+
+
+@pytest.mark.parametrize("favorites, status", [
+    ({"movies": ["dune", "dune", "dune"]}, 422),
+    ({"movies": ["dune", "interstellar", "introuvable"]}, 404),
+    ({"introuvable": ["dune", "interstellar", "inception"]}, 404),
+])
+def test_feed_validates_favorites(client, favorites, status):
+    assert client.post("/recommend/feed", json={"favorites": favorites}).status_code == status
+
+
 def test_similar_disambiguates(client):
     assert client.get("/similar/dune").status_code == 409
     assert client.get("/similar/interstellar").status_code == 200
