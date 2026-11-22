@@ -1,0 +1,14 @@
+name: Signaler un problème
+description: Décrire un problème reproductible
+body:
+  - type: textarea
+    attributes:
+      label: Étapes et données utilisées
+      description: Indiquer le domaine, le modèle et la version. Joindre des exemples synthétiques.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Résultat observé et résultat attendu
+    validations:
+      required: true
