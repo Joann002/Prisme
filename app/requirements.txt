@@ -1,2 +1,2 @@
-# Community Cloud installe ce fichier depuis la racine du dépôt.
-.[serving]
+# Community Cloud doit importer le code du dépôt après chaque mise à jour.
+-e .[serving]
