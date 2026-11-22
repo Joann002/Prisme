@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reco-platform"
+version = "0.1.0"
+description = "Plateforme ouverte de recommandation et d'exploration multi-domaines."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "scipy>=1.13,<2",
+  "scikit-learn>=1.5,<2",
+  "PyYAML>=6,<7",
+  "pyarrow>=17,<27",
+]
+
+[project.optional-dependencies]
+serving = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic>=2.11,<3",
+  "prometheus-client>=0.22,<1", "streamlit>=1.58,<2",
+  "implicit>=0.7.2,<1",
+]
+advanced = [
+  "faiss-cpu>=1.10,<2", "sentence-transformers==5.1.2",
+  "transformers==4.57.6", "torch>=2.10,<2.11",
+]
+experiments = ["implicit>=0.7.2,<1", "optuna>=4.2,<5", "mlflow>=3,<4"]
+production = ["redis>=6,<8", "psycopg[binary]>=3.2,<4"]
+dev = ["pytest>=8.3,<10", "httpx>=0.28,<1", "ruff>=0.11,<1", "build>=1.2,<2"]
+docs = ["mkdocs>=1.6,<2"]
+analysis = ["matplotlib>=3.9,<4", "ipykernel>=6,<8"]
+load = ["locust>=2.34,<3"]
+
+[project.scripts]
+reco-platform = "reco_platform.cli:main"
+
+[tool.setuptools]
+include-package-data = false
+package-dir = {"" = "src", "app" = "app", "api" = "api"}
+packages = [
+  "reco_platform", "reco_platform.domains", "reco_platform.models",
+  "reco_platform.features", "reco_platform.evaluation", "app", "api",
+]
+
+[tool.setuptools.package-data]
+reco_platform = ["configs/*.yaml", "fixtures/*.json"]
+app = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 110
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.uv.sources]
+torch = [{index = "pytorch-cpu", marker = "sys_platform == 'linux' or sys_platform == 'win32'"}]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
