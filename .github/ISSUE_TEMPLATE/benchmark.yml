@@ -1,0 +1,13 @@
+name: Contribuer au benchmark
+description: Proposer un modèle, un domaine ou une réplication indépendante
+body:
+  - type: textarea
+    attributes:
+      label: Source, licence et protocole
+      description: Inclure les commandes de reproduction et les changements de paramètres.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Résultats
+      description: Inclure les métriques, K, le nombre de cas et les limites.

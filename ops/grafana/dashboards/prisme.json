@@ -1,0 +1,32 @@
+{
+  "title": "Prisme",
+  "uid": "prisme",
+  "schemaVersion": 40,
+  "time": {"from": "now-1h", "to": "now"},
+  "panels": [
+    {
+      "id": 1, "type": "timeseries", "title": "Latence p95 des routes (s)",
+      "gridPos": {"x": 0, "y": 0, "w": 12, "h": 9},
+      "datasource": {"type": "prometheus", "uid": "prisme-prometheus"},
+      "targets": [{"refId": "A", "expr": "histogram_quantile(0.95, sum by (le, route) (rate(prisme_http_seconds_bucket[5m])))", "legendFormat": "{{route}}"}]
+    },
+    {
+      "id": 2, "type": "timeseries", "title": "Part du top 20 % des items",
+      "gridPos": {"x": 12, "y": 0, "w": 12, "h": 9},
+      "datasource": {"type": "prometheus", "uid": "prisme-prometheus"},
+      "targets": [{"refId": "A", "expr": "sum by (domain) (rate(prisme_recommendations_total{bucket=\"top_20pct\"}[5m])) / sum by (domain) (rate(prisme_recommendations_total[5m]))", "legendFormat": "{{domain}}"}]
+    },
+    {
+      "id": 3, "type": "timeseries", "title": "Diversité moyenne",
+      "gridPos": {"x": 0, "y": 9, "w": 12, "h": 9},
+      "datasource": {"type": "prometheus", "uid": "prisme-prometheus"},
+      "targets": [{"refId": "A", "expr": "sum by (domain) (rate(prisme_list_diversity_sum[5m])) / sum by (domain) (rate(prisme_list_diversity_count[5m]))", "legendFormat": "{{domain}}"}]
+    },
+    {
+      "id": 4, "type": "timeseries", "title": "Votes par domaine et type",
+      "gridPos": {"x": 12, "y": 9, "w": 12, "h": 9},
+      "datasource": {"type": "prometheus", "uid": "prisme-prometheus"},
+      "targets": [{"refId": "A", "expr": "sum by (domain, vote) (increase(prisme_feedback_total[15m]))", "legendFormat": "{{domain}} {{vote}}"}]
+    }
+  ]
+}

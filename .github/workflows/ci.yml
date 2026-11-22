@@ -1,0 +1,46 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: '0.13.9'
+          python-version: ${{ matrix.python }}
+      - run: uv sync --locked --extra serving --extra dev --extra experiments --extra docs
+      - run: uv run --no-sync ruff check .
+      - run: uv run --no-sync python -m pytest -q
+      - run: uv run --no-sync mkdocs build --strict
+      - run: uv build --no-sources
+      - run: uv run --no-sync python scripts/deploy_space.py --dry-run
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: docker build -t prisme:test .
+      - run: |
+          docker run -d --name prisme-ci -p 127.0.0.1:8000:8000 prisme:test \
+            uvicorn api.main:app --host 0.0.0.0 --port 8000
+          curl --retry 12 --retry-all-errors --retry-delay 1 --fail http://localhost:8000/health
+      - run: |
+          docker run -d --name prisme-ci-demo -p 127.0.0.1:7860:7860 prisme:test
+          curl --retry 12 --retry-all-errors --retry-delay 1 --fail http://localhost:7860/_stcore/health
+      - if: failure()
+        run: |
+          docker logs prisme-ci 2>/dev/null || true
+          docker logs prisme-ci-demo 2>/dev/null || true
+      - if: always()
+        run: docker rm -f prisme-ci prisme-ci-demo || true

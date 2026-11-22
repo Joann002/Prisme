@@ -1,0 +1,11 @@
+site_name: Prisme
+site_description: Plateforme de recommandation multi-domaines
+site_dir: site
+nav:
+  - Accueil: index.md
+  - Données et licences: datasets.md
+  - Ajouter un domaine: ajouter-un-domaine.md
+  - Fiches des modèles: modeles.md
+  - Exploitation et publication: exploitation.md
+  - Confidentialité: confidentialite.md
+  - Article de lancement: lancement.md
