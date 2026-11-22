@@ -12,7 +12,7 @@ from reco_platform.config import DomainConfig
 
 INTERACTION_COLUMNS = ["user_id", "item_id", "timestamp", "feedback"]
 ITEM_COLUMNS = ["item_id", "titre", "description", "tags", "domaine"]
-OPTIONAL_COLUMNS = ["image", "year", "theme", "entity"]
+OPTIONAL_COLUMNS = ["image", "year", "theme", "entity", "source", "source_url"]
 
 
 @dataclass
