@@ -109,6 +109,8 @@ Les voisins item-item sont le meilleur choix mesuré pour des profils avec histo
 
 ## Publication
 
-Le dépôt contient un workflow GitHub Actions manuel pour publier la démo sur un Space Docker et une configuration de release pour PyPI et GHCR. Le badge CI indique l’état des vérifications sur `main`. [Configuration du Space et du secret Actions](docs/exploitation.md)
+La démo peut être publiée sur Streamlit Community Cloud depuis le dépôt `Joann002/Prisme`. Choisis la branche `main`, le fichier `app/streamlit_app.py` et Python 3.12. Le fichier `app/requirements.txt` installe le projet avec ses dépendances de démo et `packages.txt` ajoute la bibliothèque système utilisée par ALS. La démo démarre avec le catalogue synthétique inclus dans le projet. [Déployer sur Streamlit Community Cloud](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy)
+
+Le dépôt contient aussi un workflow manuel pour Hugging Face Spaces et une configuration de release pour PyPI et GHCR. Le badge CI indique l’état des vérifications sur `main`. [Configuration de la publication](docs/exploitation.md)
 
 Le code est sous [licence MIT](LICENSE). Les deux polices embarquées sont sous SIL Open Font License. Les sources tierces conservent leurs propres conditions. Voir [Contribuer](CONTRIBUTING.md).

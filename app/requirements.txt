@@ -1,0 +1,2 @@
+# Community Cloud installe ce fichier depuis la racine du dépôt.
+.[serving]
