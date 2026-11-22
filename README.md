@@ -13,6 +13,8 @@ license: mit
 
 Prisme recommande des films, des livres, des jeux, de la musique et des recettes à partir de quelques favoris. On peut prolonger une découverte dans un autre domaine, par exemple passer de trois films à des livres, et comparer deux modèles sur la même sélection.
 
+[Ouvrir la démo en ligne](https://prisme-vault.streamlit.app/)
+
 [![CI](https://github.com/Joann002/Prisme/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Joann002/Prisme/actions/workflows/ci.yml)
 
 ![Aperçu de la démo Prisme](reports/accueil.png)
