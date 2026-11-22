@@ -16,7 +16,7 @@ from prometheus_client import Histogram
 from reco_platform.evaluation.metrics import distance
 from reco_platform.service import RequestError
 
-from .schemas import CrossRequest, FeedbackRequest, TasteRequest
+from .schemas import CrossRequest, FeedbackRequest, FeedRequest, TasteRequest
 
 LOGGER = logging.getLogger("prisme")
 LATENCY = Histogram("prisme_http_seconds", "Latence de l’API", ["method", "route", "status"])
@@ -188,6 +188,13 @@ class Runtime:
         )
         return self.wrap(body.target_domain, f"cross_{body.method}", items)
 
+    def feed(self, body: FeedRequest):
+        groups = self.cache.get_or_set(
+            ["feed", body.model_dump()],
+            lambda: self.engine.recommend_feed(body.favorites, k=body.k),
+        )
+        return {"groups": [self.wrap(slug, "feed", items) for slug, items in groups.items()]}
+
     def similar(self, slug, item, k):
         model = "semantic" if "semantic" in self.engine.models(slug) else "tfidf"
         items = self.cache.get_or_set(["similar", slug, item, k], lambda: self.engine.similar(slug, item, k=k))
@@ -224,6 +231,8 @@ class Runtime:
             return self.taste(TasteRequest.model_validate(payload))
         if action == "cross":
             return self.cross(CrossRequest.model_validate(payload))
+        if action == "feed":
+            return self.feed(FeedRequest.model_validate(payload))
         if action == "feedback":
             return self.feedback(FeedbackRequest.model_validate(payload))
         raise RequestError("Action indéfinie.", 404)
