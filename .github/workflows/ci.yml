@@ -26,6 +26,29 @@ jobs:
       - run: uv run --no-sync mkdocs build --strict
       - run: uv build --no-sources
       - run: uv run --no-sync python scripts/deploy_space.py --dry-run
+      - name: Vérifier le démarrage Streamlit Community Cloud
+        if: matrix.python == '3.12'
+        env:
+          RECO_EXTERNAL_CATALOGS: '0'
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+        run: |
+          uv pip install --no-deps -r app/requirements.txt
+          cd "$RUNNER_TEMP"
+          "$GITHUB_WORKSPACE/.venv/bin/python" - <<'PY'
+          from os import environ
+          from pathlib import Path
+
+          from api import runtime
+          from reco_platform import service
+          from streamlit.testing.v1 import AppTest
+
+          root = Path(environ["GITHUB_WORKSPACE"]).resolve()
+          assert Path(service.__file__).resolve() == root / "src/reco_platform/service.py"
+          assert Path(runtime.__file__).resolve() == root / "api/runtime.py"
+          app = AppTest.from_file(str(root / "app/streamlit_app.py")).run(timeout=20)
+          assert not app.exception, app.exception
+          PY
   container:
     runs-on: ubuntu-latest
     steps:
