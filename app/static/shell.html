@@ -9,6 +9,7 @@
       <nav class="menu" aria-label="Navigation principale">
         <p>EXPLORER</p>
         <button class="nav-item" type="button" data-view="discover" aria-current="page"><span data-icon="compass"></span>Découvrir</button>
+        <button class="nav-item" type="button" data-view="feed"><span data-icon="spark"></span>Pour toi</button>
         <button class="nav-item" type="button" data-view="cross"><span data-icon="shuffle"></span>Entre les domaines</button>
         <button class="nav-item" type="button" data-view="compare"><span data-icon="columns"></span>Comparer les modèles</button>
       </nav>
@@ -54,11 +55,12 @@
           <aside class="selection" aria-labelledby="selection-title">
             <div class="selection-header">
               <div class="selection-icon"><span data-icon="bookmark"></span></div>
-              <div><h3 id="selection-title">Ma sélection</h3><p>Les favoris de départ</p></div>
+              <div><h3 id="selection-title">Ma sélection</h3><p data-role="selection-scope">Les favoris de départ</p></div>
               <span class="selection-count" data-role="selection-count">0 / 5</span>
             </div>
             <div class="progress" role="presentation" data-role="progress"></div>
             <div class="seeds" data-role="seeds"></div>
+            <p class="selection-total" data-role="selection-total" hidden></p>
             <div class="mode-options" data-role="options"></div>
             <button class="button primary submit" type="button" data-action="recommend" disabled><span data-icon="spark"></span><span data-role="submit-label">Voir mes recommandations</span></button>
             <div class="selection-footer"><span data-icon="lock"></span>Ta sélection reste dans cette session.</div>
