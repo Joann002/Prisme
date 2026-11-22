@@ -1,6 +1,6 @@
 FROM ghcr.io/astral-sh/uv:0.13.9 AS uv
 
-FROM python:3.12-slim-bookworm
+FROM python:3.15-slim-bookworm
 COPY --from=uv /uv /usr/local/bin/uv
 RUN sed -i "s|http://deb.debian.org|https://deb.debian.org|g" /etc/apt/sources.list.d/debian.sources \
     && apt-get update \
