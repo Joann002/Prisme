@@ -1,0 +1,74 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: '0.13.9'
+          python-version: '3.12'
+      - run: |
+          python -c 'import os, tomllib; assert "v" + tomllib.load(open("pyproject.toml", "rb"))["project"]["version"] == os.environ["GITHUB_REF_NAME"]'
+          uv sync --locked --extra serving --extra dev
+          uv run --no-sync python -m pytest -q
+          uv build --no-sources
+      - uses: actions/upload-artifact@v4
+        with:
+          name: distributions
+          path: dist/
+  images:
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/metadata-action@v5
+        id: metadata
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: type=semver,pattern={{version}}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+  pypi:
+    needs: package
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: distributions
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@release/v1
+  github-release:
+    needs: [package, images]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: distributions
+          path: dist
+      - run: gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --verify-tag --generate-notes dist/*
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
