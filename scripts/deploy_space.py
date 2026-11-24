@@ -1,4 +1,4 @@
-"""Prépare ou publie une révision Git de Prisme vers un Space Docker existant."""
+"""Prépare ou publie une révision Git de Prisme vers un Space Docker."""
 from __future__ import annotations
 
 import argparse
@@ -40,12 +40,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--revision", default="HEAD")
     parser.add_argument("--space", default=os.getenv("HF_SPACE_ID"))
+    parser.add_argument(
+        "--create-space", action="store_true", default=os.getenv("HF_CREATE_SPACE") == "true",
+        help="Crée le Space public sur CPU Basic s’il est absent.",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Prépare l’archive sans accès réseau.")
     args = parser.parse_args()
     token = os.getenv("HF_TOKEN")
     if not args.dry_run:
         if not args.space or not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", args.space):
-            parser.error("Indique le Space existant comme COMPTE/NOM.")
+            parser.error("Indique le Space comme COMPTE/NOM.")
         if not token:
             parser.error("Configure HF_TOKEN avant la publication.")
     with TemporaryDirectory() as directory:
@@ -61,6 +65,11 @@ def main():
         from huggingface_hub import HfApi
 
         hub = HfApi(token=token)
+        if args.create_space:
+            hub.create_repo(
+                args.space, repo_type="space", space_sdk="docker", space_hardware="cpu-basic",
+                private=False, exist_ok=True,
+            )
         space = hub.space_info(args.space, revision="main")
         if space.sdk != "docker":
             parser.error("Le Space doit utiliser le SDK Docker.")
